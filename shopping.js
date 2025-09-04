@@ -5,37 +5,32 @@ const prompt = require("prompt-sync")();
 function comprar() {
     let continuarComprando = true;
     do {
-        let produto = prompt("Digite o nome do produto: ");
-        let valor = Number.parseFloat(prompt("Informe o valor do produto: "));
+        let produto = prompt("Digite o nome do produto: ").toUpperCase();
+        let valor = Number(prompt("Informe o valor do produto: "));
         total += valor;
+        console.log(`\nVocê acabou de comprar: ${produto}\n\nSeu total em compras é: ${total}`);
+        console.log("--------------------------------\n")
         let comprarMais = prompt("Deseja adicionar mais produtos? S/N: ").toUpperCase();
         if(comprarMais === "N"){
             continuarComprando = false;
         }
         
     } while (continuarComprando === true);
-
+    menu();
 }
 
 function lojaRoupas() {
-    console.log("----------LOJA DE ROUPAS--------------"); 
-    
-    let produto = prompt("Digite o nome do produto: ");
-    let valor = Number.parseFloat(prompt("Informe o valor do produto: "));
-    let comprarMais = prompt("Deseja adicionar mais produtos? S/N: ").toUpperCase();
-    if(comprarMais === "S") {
-
-    }
-    
+    console.log("------------LOJA DE ROUPAS------------"); 
+    comprar();
 }
 
 function lojaPerfumes() {
-    console.log("----------LOJA DE PERFUMES------------");      
+    console.log("------------LOJA DE PERFUMES-------------");      
     
 }
 
 function lojaCalcados() {
-    console.log("----------LOJA DE CALÇADOS----------");      
+    console.log("------------LOJA DE CALÇADOS------------");      
     
 }
 
@@ -45,18 +40,19 @@ function voltar(){
 
 
 // ----------Main-------------
-console.log("----------------------------");
-console.log("           SHOPPING");
+console.log("\n\n--------------------------------");
+console.log("|           SHOPPING            |");
+console.log("--------------------------------\n");
 
-let total;
+let total = 0.0;
 
 function menu() {
-    console.log("-----------Menu----------");
+    console.log("          Menu        ");
     console.log("1 - LOJA DE ROUPAS");
     console.log("2 - LOJA DE PERFUMES");
     console.log("3 - LOJA DE CALÇADOS");
     console.log("0 - SAIR");  
-    console.log("----------------------------"); 
+    console.log("--------------------------------\n"); 
     let opcaoMenu = Number(prompt("Digite um número para escolher uma opção: "));
     switch(opcaoMenu) {
         case 1:
