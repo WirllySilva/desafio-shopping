@@ -53,18 +53,13 @@ function lojaRoupas() {
 
 function lojaPerfumes() {
     console.log("------------LOJA DE PERFUMES-------------");      
-    
+    comprar();
 }
 
 function lojaCalcados() {
     console.log("------------LOJA DE CALÇADOS------------");      
-    
+    comprar();
 }
-
-function voltar(){
-    menu();
-}
-
 
 // ----------Main-------------
 console.log("\n\n--------------------------------");
