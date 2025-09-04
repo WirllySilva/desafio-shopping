@@ -2,6 +2,33 @@ const prompt = require("prompt-sync")();
 
 // ----------Functions--------------
 
+function menu() {
+    console.log("          Menu        ");
+    console.log("1 - LOJA DE ROUPAS");
+    console.log("2 - LOJA DE PERFUMES");
+    console.log("3 - LOJA DE CALÇADOS");
+    console.log("0 - SAIR");  
+    console.log("--------------------------------\n"); 
+    let opcaoMenu = Number(prompt("Digite um número para escolher uma opção: "));
+    switch(opcaoMenu) {
+        case 1:
+            lojaRoupas();
+            break;
+        case 2:
+            lojaPerfumes();
+            break;
+        case 3:
+            lojaCalcados();
+            break;
+        case 0:
+            console.log("Saindo...");
+            break;
+        default:
+            console.log("Escolha uma opção valida");
+            menu();
+    }
+}
+
 function comprar() {
     let continuarComprando = true;
     do {
@@ -46,32 +73,7 @@ console.log("--------------------------------\n");
 
 let total = 0.0;
 
-function menu() {
-    console.log("          Menu        ");
-    console.log("1 - LOJA DE ROUPAS");
-    console.log("2 - LOJA DE PERFUMES");
-    console.log("3 - LOJA DE CALÇADOS");
-    console.log("0 - SAIR");  
-    console.log("--------------------------------\n"); 
-    let opcaoMenu = Number(prompt("Digite um número para escolher uma opção: "));
-    switch(opcaoMenu) {
-        case 1:
-            lojaRoupas();
-            break;
-        case 2:
-            lojaPerfumes();
-            break;
-        case 3:
-            lojaCalcados();
-            break;
-        case 0:
-            console.log("Saindo...");
-            break;
-        default:
-            console.log("Escolha uma opção valida");
-            menu();
-    }
-}
+
 
 menu();
 console.log(total);
