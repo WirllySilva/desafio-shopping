@@ -64,11 +64,12 @@ function lojaCalcados() {
 function retirarItem() {
     let opcao;
     while(true) {
-         let opcao = prompt("Digite o item que deseja retirar ou (S) para sair:").toUpperCase();
+         opcao = prompt("Digite o item que deseja retirar ou (S) para sair:").toUpperCase();
 
          if (opcao === "S") {
             console.log("Saindo...");
             sair();
+            break;
         }
 
         let valor = Number(prompt("Qual valor do item? "));
@@ -80,6 +81,7 @@ function retirarItem() {
         console.log(`Você retirou o item ${opcao} com valor de ${valor}`);
         totalCompras -= valor;
         console.log(`Valor total do carrinho atualizado: ${totalCompras}`);
+    }
 }
 
 function sair() {
@@ -110,6 +112,7 @@ function sair() {
 }
 
 // ----------Main-------------
+
 console.log("\n\n--------------------------------");
 console.log("|           SHOPPING            |");
 console.log("--------------------------------\n");
@@ -119,4 +122,3 @@ let totalCompras = 0.0;
 
 
 menu();
-console.log(total);
