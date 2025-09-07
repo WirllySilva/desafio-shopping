@@ -159,50 +159,65 @@ function sair() {
 function lojaMequi() {
     console.log("Bem vindo ao\n  MEQUI")
     
-        let continuarComprando = true;
+        let continuarComprando; // Cria uma variável para controlarmos os loops.
 
         do {
-            let meuMequi = prompt("Digite o nome do produto Mequi: ");
-            let valor = Number.parseFloat(prompt("Informe o valor do produto: "));
-
-            if (isNaN(valor) || valor <= 0) {
-                console.log("Valor inválido. Digite um valor válido.\n");
-                continue;
-            }
-
-            totalMequi += valor;
-            console.log(`\nVocê acabou de comprar: ${meuMequi}`);
-            console.log(`Seu total em compras é: ${moedaFormat(totalMequi)}`);
-            console.log("--------------------------------\n");
-
-            let comprarMaisMequi;
+            continuarComprando = true; //Aqui atribuimos true, para poder controlar o loop interno.
             do {
-                comprarMaisMequi = prompt("Deseja Comprar mais? S/N: ").toUpperCase();
-                if(comprarMaisMequi !== "N" && comprarMaisMequi !== "S") {
-                    console.log("OPÇÃO INVÁLIDA\nDigite S ou N.");
+                let meuMequi = prompt("Digite o nome do produto Mequi: ");
+                let valor = Number.parseFloat(prompt("Informe o valor do produto: "));
+                
+                // Verifica se o usuário digitou um número e que não digitou um número negativo.
+                if (isNaN(valor) || valor <= 0) {
+                    console.log("Valor inválido. Digite um valor válido.\n");
+                    continue; //Retorna para o inicio do laço;
                 }
-            } while(comprarMaisMequi !== "S" && comprarMaisMequi !== "N");
+                
 
-            if(comprarMaisMequi === "N") {
-                continuarComprando = false;
+                totalMequi += valor; // soma o valor digitado em valor à totalMequi
+                console.log(`\nProduto adicionado ao carrinho: ${meuMequi}\nValor do produto: ${moedaFormat(valor)}`);
+                console.log(`Total do carrinho: ${moedaFormat(totalMequi)}`);
+                console.log("--------------------------------\n");
+
+                //Essa variável vai receber a resposta do comprar mais sim ou não,
+                //pra podermos veriicar e controlar o proximo loop doWhile
+                let comprarMaisMequi;
+                
+                //Aqui iniciamos outro loop doWhile  para forçar o usuário a digitar S ou N.
+                do { 
+                    comprarMaisMequi = prompt("Deseja Adicionar mais itens a compra? S/N: ").toUpperCase();
+
+                    // Aqui nessa condição, nós vamos verificar se o usuário digou S ou N
+                    if(comprarMaisMequi !== "N" && comprarMaisMequi !== "S") {
+                        console.log("OPÇÃO INVÁLIDA\nDigite S ou N."); // aviso ao usuário que ele não digitou S ou N.
+                    }
+
+                } while(comprarMaisMequi !== "S" && comprarMaisMequi !== "N"); //Caso o usuário não digite S ou N, ele repete o loop.
+
+                //Se o usuário digitar S ou N, ele aqui verifica e se caso for N 
+                //nossa variável de controle recebe False, para podermos encerrar o loop.
+                if(comprarMaisMequi === "N") {
+                    continuarComprando = false;
+                }        
+            } while (continuarComprando); // Enquanto continuar comprando for True, ele repete o loop.
+
+            console.log(`\nTotal do pedido Méqui: ${moedaFormat(totalMequi)}`);
+    
+            // Nossa condição final pra verificar se ultrapassou o orçamento dos amigos.
+            // Caso ultrapasse o orçamento, nos vamos zerar o carrinho e reiniciar a compra.
+            if(totalMequi > orcamentoMequi) {
+                console.log(`Valor ultrapassou o orçamento de ${moedaFormat(orcamentoMequi)}\n`);
+                console.log("Tente novamente.\n Reiniciando compra...");
+                totalMequi = 0; // zera o carrinho
+                continuarComprando = true; //atribui true para nossa variável de controle.
+            } else {
+                console.log("COMPRA FINALIZADA!")
+                console.log(`Seu total é de ${moedaFormat(totalMequi)}`);
+                console.log("----------------------------\n\nVOLTE SEMPRE.\n")
+                break;
             }
-        
-        } while (continuarComprando);
-
-        console.log(`\nTotal do pedido Méqui: ${moedaFormat(totalMequi)}`);
-    
-    
-        if(totalMequi > orcamentoMequi) {
-            console.log(`Valor ultrapassou o orçamento\n`);
-            console.log("Tente novamente.\n Reiniciando compra...");
-
-        } else {
-            console.log("COMPRA FINALIZADA!")
-            console.log(`Seu total é de ${moedaFormat(totalMequi)}`);
-            console.log("----------------------------\n\nVOLTE SEMPRE.\n")
-        
-        }
-    }
+        } while(true);
+} 
 
 // Essa função formata os valores em moedas do tipo real, igual vimos em aula.
 function moedaFormat(valor) {
@@ -216,11 +231,12 @@ console.log("\n\n--------------------------------");
 console.log("|           SHOPPING            |");
 console.log("--------------------------------\n");
 
+
 let totalCompras = 0.0;
 
 const orcamentoMequi = 34 + 25 + 15 + 50; // A soma do orçamento dos amigos.
 let totalMequi = 0.0;
 
 
-
+//Chama nossa função principal.
 menu();
